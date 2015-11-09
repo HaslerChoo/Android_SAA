@@ -30,6 +30,7 @@ public class Login extends AppCompatActivity implements NavigationView.OnNavigat
     Button signUp;
     EditText email;
     EditText pw;
+    EditText edt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
