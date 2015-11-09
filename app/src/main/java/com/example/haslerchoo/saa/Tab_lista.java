@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +36,7 @@ public class Tab_lista extends AppCompatActivity implements NavigationView.OnNav
     private DrawerLayout mDrawerLayout;
     private NavigationView navigationView;
     static Context contexto;
-    TextView texto;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

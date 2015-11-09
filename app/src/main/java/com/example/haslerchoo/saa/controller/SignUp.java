@@ -103,6 +103,7 @@ public class SignUp extends AppCompatActivity  implements NavigationView.OnNavig
                 }
 
                 new NovoCliente(novo).execute();
+                Listas.clientes.add(novo);
                 Snackbar.make(view, "Criado", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                 Intent intent=new Intent(getApplicationContext(),Login.class);
                 startActivity(intent);
