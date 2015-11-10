@@ -40,7 +40,8 @@
         <activity
             android:name=".controller.Edit_cliente"
             android:label="@string/title_activity_edit_cliente"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".controller.reserva"></activity>
     </application>
 
 </manifest>

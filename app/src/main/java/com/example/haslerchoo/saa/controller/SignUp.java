@@ -191,7 +191,8 @@ public class SignUp extends AppCompatActivity  implements NavigationView.OnNavig
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
+        protected
+        void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
         }
     }

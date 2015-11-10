@@ -9,14 +9,6 @@
     android:gravity="bottom"
     android:weightSum="1">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_picture"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true" />
-
 
     <TextView
         android:id="@+id/user"
@@ -24,6 +16,14 @@
         android:layout_height="wrap_content"
         android:textColor="#00ff00"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_gravity="center_horizontal" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:layout_gravity="center_horizontal" />
 
     <TextView
