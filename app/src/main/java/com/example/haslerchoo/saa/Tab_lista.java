@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.haslerchoo.saa.controller.DesignRecyclerAdapter;
+import com.example.haslerchoo.saa.controller.Edit_cliente;
 import com.example.haslerchoo.saa.controller.FragmentControler;
 import com.example.haslerchoo.saa.controller.Listar_reserva;
 import com.example.haslerchoo.saa.controller.Listar_voo;
@@ -147,21 +148,24 @@ public class Tab_lista extends AppCompatActivity implements NavigationView.OnNav
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        item.setChecked(true);
+        mDrawerLayout.closeDrawers();
         if (item.getTitle().toString().equals("LogIn")) {
-            item.setChecked(true);
-            mDrawerLayout.closeDrawers();
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
         }
         else if(item.getTitle().toString().equals("LogOut"))
             {
-                item.setChecked(true);
-                mDrawerLayout.closeDrawers();
                 Listas.logInCliente=null;
                 Toast.makeText(getApplicationContext(),"Sair",Toast.LENGTH_LONG).show();
                 Intent intent=new Intent(getApplicationContext(),Tab_lista.class);
                 startActivity(intent);
             }
+        else if(item.getTitle().toString().equals("Modificar Dados"))
+        {
+            Intent intent=new Intent(getApplicationContext(),Edit_cliente.class);
+            startActivity(intent);
+        }
         return true;
 
     }

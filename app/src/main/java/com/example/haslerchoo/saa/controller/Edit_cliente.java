@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.haslerchoo.saa.R;
 import com.example.haslerchoo.saa.bean.Cliente;
@@ -32,7 +33,7 @@ import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SignUp extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener,DatePickerDialog.OnDateSetListener{
+public class Edit_cliente extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener,DatePickerDialog.OnDateSetListener{
     private final int RESULT_LOAD_IMAGE=1;
 
     private NavigationView navigationView;
@@ -60,6 +61,11 @@ public class SignUp extends AppCompatActivity  implements NavigationView.OnNavig
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+
+        year=Listas.logInCliente.getData_nasc().getYear();
+        month=Listas.logInCliente.getData_nasc().getMonth();
+        day=Listas.logInCliente.getData_nasc().getDay();
+
         navigationView = (NavigationView) findViewById(R.id.navigation_back);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -70,6 +76,17 @@ public class SignUp extends AppCompatActivity  implements NavigationView.OnNavig
         data=(EditText)findViewById(R.id.dataNasc);
         email=(EditText)findViewById(R.id.email);
         senha=(EditText)findViewById(R.id.password);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String date = sdf.format(Listas.logInCliente.getData_nasc());
+
+        email.setKeyListener(null);
+        nome.setText(Listas.logInCliente.getNome());
+        email.setText(Listas.logInCliente.getEmail());
+        apelido.setText(Listas.logInCliente.getApelido());
+        morada.setText(Listas.logInCliente.getMorada());
+        data.setText(date);
+        senha.setText(Listas.logInCliente.getSenha());
 
         data.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,24 +141,14 @@ public class SignUp extends AppCompatActivity  implements NavigationView.OnNavig
                     return;
                 }
                 Calendar dat=Calendar.getInstance();
-                dat.set(year, month,day);
+                dat.set(year, month, day);
                 Cliente novo=new Cliente(Listas.clientes.size(),nome.getText().toString(), apelido.getText().toString(),morada.getText().toString(), dat.getTime(),
                         email.getText().toString(), senha.getText().toString());
 
-                for (Cliente c:Listas.clientes)
-                {
-                    if (c.equals(novo))
-                    {
-                        Snackbar.make(view, "Conta Ja existe", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-                        return;
-                    }
-                }
-
-                new NovoCliente(novo).execute();
+                 new ActulizarCliente(novo).execute();
                 Listas.clientes.add(novo);
-                Snackbar.make(view, "Criado", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-                Intent intent=new Intent(getApplicationContext(),Login.class);
-                startActivity(intent);
+                Toast.makeText(getApplicationContext(),"Modificado com sucesso",Toast.LENGTH_LONG).show();
+                finish();
             }
         });
     }
@@ -164,7 +171,7 @@ public class SignUp extends AppCompatActivity  implements NavigationView.OnNavig
         cal.setMinDate(min);
         cal.setMaxDate(max);
         cal.show(getFragmentManager(), "Data de Nascimento");
-        onDateSet(null,year,month,day);
+        onDateSet(null, year, month, day);
 
     }
 
@@ -174,18 +181,19 @@ public class SignUp extends AppCompatActivity  implements NavigationView.OnNavig
         month=monthOfYear;
         day=dayOfMonth;
         data.setText(dayOfMonth+"-"+(monthOfYear+1)+"-"+year);
+
     }
 
-    public class NovoCliente extends AsyncTask<Void,Void,Void> {
+    public class ActulizarCliente extends AsyncTask<Void,Void,Void> {
 
         Cliente cliente;
-        public NovoCliente(Cliente c)
+        public ActulizarCliente(Cliente c)
         {
             cliente=c;
         }
         @Override
         protected Void doInBackground(Void... params) {
-            Databaseconnector.saveCliente(cliente);
+            Databaseconnector.actualizarCliente(cliente);
             Log.d("edit", "modificado");
             return null;
         }

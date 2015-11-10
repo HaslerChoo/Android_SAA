@@ -2,10 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.haslerchoo.saa">
 
-
-
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -34,10 +32,14 @@
         <activity
             android:name=".controller.Login"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".controller.SignUp"
             android:label="@string/title_activity_sign_up"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".controller.Edit_cliente"
+            android:label="@string/title_activity_edit_cliente"
             android:theme="@style/AppTheme"></activity>
     </application>
 
