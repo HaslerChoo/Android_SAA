@@ -1,8 +1,12 @@
 package com.example.haslerchoo.saa.controller;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -12,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.haslerchoo.saa.R;
@@ -22,8 +25,10 @@ import com.example.haslerchoo.saa.util.Listas;
 
 import java.util.Date;
 
-public class SignUp extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener  {
+import de.hdodenhof.circleimageview.CircleImageView;
 
+public class SignUp extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener  {
+    private final int RESULT_LOAD_IMAGE=1;
     private NavigationView navigationView;
     EditText nome;
     EditText apelido;
@@ -32,6 +37,7 @@ public class SignUp extends AppCompatActivity  implements NavigationView.OnNavig
     EditText email;
     EditText senha;
     FloatingActionButton fab;
+    public CircleImageView profile_pic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +50,7 @@ public class SignUp extends AppCompatActivity  implements NavigationView.OnNavig
         navigationView = (NavigationView) findViewById(R.id.navigation_back);
         navigationView.setNavigationItemSelectedListener(this);
 
+        profile_pic=(CircleImageView)findViewById((R.id.upload_profile_picture));
         nome=(EditText)findViewById(R.id.nome);
         apelido=(EditText)findViewById(R.id.apelido);
         morada=(EditText)findViewById(R.id.morada);
@@ -51,6 +58,13 @@ public class SignUp extends AppCompatActivity  implements NavigationView.OnNavig
         email=(EditText)findViewById(R.id.email);
         senha=(EditText)findViewById(R.id.password);
 
+        profile_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gallery=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(gallery,RESULT_LOAD_IMAGE);
+            }
+        });
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,5 +166,33 @@ public class SignUp extends AppCompatActivity  implements NavigationView.OnNavig
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try
+        {
+            if (requestCode==RESULT_LOAD_IMAGE && resultCode==RESULT_OK && data!=null)
+            {
+                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
+                {
+                    if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE))
+                    {
+
+                    }
+                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},RESULT_LOAD_IMAGE);
+                }
+                Uri selectedImage=data.getData();
+                profile_pic.setImageURI(selectedImage);
+            }
+        }
+        catch (java.lang.SecurityException e)
+        {
+            Log.d("Permissions","Acesso negado pelo utilizador");
+        }
+
+    }
+
 
 }

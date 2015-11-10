@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.haslerchoo.saa.R;
 import com.example.haslerchoo.saa.Tab_lista;
+import com.example.haslerchoo.saa.util.Listas;
 
 import java.util.ArrayList;
 
@@ -33,14 +34,15 @@ public class FragmentControler extends FragmentStatePagerAdapter {
             case 0:
                 return new Listar_voo();
             case 1:
-                return new Listar_reserva();
+                if (Listas.logInCliente!=null)
+                    return new Listar_reserva();
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return Listas.logInCliente!=null? 2 : 1;
     }
 
     @Override

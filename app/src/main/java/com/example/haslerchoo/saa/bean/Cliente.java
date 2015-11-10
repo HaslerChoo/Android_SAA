@@ -104,7 +104,6 @@ public class Cliente {
 
 
     public ArrayList<Voo> getVoos() {
-        Log.d("get",voos+"");
         if (voos == null || voos.size()==0) {
             voos = new ArrayList<>();
         }
@@ -122,8 +121,6 @@ public class Cliente {
             bilhete=new ArrayList<>();
         }
         voos.clear();
-        Log.d("load","refresh");
-        Log.d("load",bilhete.size()+"");
         for (Bilhete bi:bilhete)
         {
             for (Voo vo:Listas.voos)
