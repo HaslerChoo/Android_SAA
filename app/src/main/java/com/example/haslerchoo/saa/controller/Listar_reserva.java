@@ -28,8 +28,8 @@ public class Listar_reserva extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
-        View v =  inflater.inflate(R.layout.fragment_listar_voo, container, false);
-        recyclerView = (RecyclerView)v.findViewById(R.id.recyclerview);
+        View v =  inflater.inflate(R.layout.fragment_listar_reserva, container, false);
+        recyclerView = (RecyclerView)v.findViewById(R.id.recyclerview_reserva);
         recyclerView.setLayoutManager(new LinearLayoutManager(Tab_lista.contexto()));
         if (Listas.logInCliente!=null) {
             recyclerView.setAdapter(new DesignRecyclerAdapter(Listas.logInCliente.getVoos()));

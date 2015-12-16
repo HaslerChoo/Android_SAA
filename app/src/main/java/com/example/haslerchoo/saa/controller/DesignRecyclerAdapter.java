@@ -1,7 +1,7 @@
 package com.example.haslerchoo.saa.controller;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,13 +34,13 @@ public class DesignRecyclerAdapter  extends RecyclerView.Adapter<DesignRecyclerA
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        try
-        {
-            String inicio= Listas.localizacoes.get(mItems.get(i).getLocal_inicio()).getNome();
-            String fim= Listas.localizacoes.get(mItems.get(i).getLocal_fim()).getNome();
-            String item = inicio+" "+fim;
-            Log.d("Choo", "1 " +getItemCount());
-            viewHolder.mTextView.setText(item);
+        try {
+            String inicio = Listas.localizacoes.get(mItems.get(i).getLocal_inicio()).getNome();
+            String fim = Listas.localizacoes.get(mItems.get(i).getLocal_fim()).getNome();
+            String item = inicio + " " + fim;
+            viewHolder.origem.setText("Partida: " + Listas.localizacoes.get(mItems.get(i).getLocal_inicio()).getNome());
+            viewHolder.destino.setText("Destino: " + Listas.localizacoes.get(mItems.get(i).getLocal_fim()).getNome());
+
         }
         catch (NullPointerException e)
         {
@@ -56,22 +56,26 @@ public class DesignRecyclerAdapter  extends RecyclerView.Adapter<DesignRecyclerA
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final TextView mTextView;
-        private String mItem;
+        private final TextView origem;
+        private final TextView destino;
 
         ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            mTextView = (TextView)v.findViewById(R.id.list_item);
+            origem = (TextView)v.findViewById(R.id.origem);
+            destino = (TextView)v.findViewById(R.id.destino);
         }
 
         public void setItem(String item) {
-            mItem = item;
-            mTextView.setText(item);
+            origem.setText(item);
         }
         @Override
         public void onClick(View v) {
-            Log.d("Choo", "onClick " + getPosition() + " " + mItem);
+            Listas.voo_escolhido= getPosition();
+            Intent intent=new Intent(v.getContext(),Reserva.class);
+
+            v.getContext().startActivity(intent);
+
         }
     }
 

@@ -144,4 +144,19 @@ public class Cliente {
         return super.equals(o);
 
     }
+
+    public void removeBilhete(int codigo) {
+        for (Bilhete b:bilhete)
+        {
+            if (codigo==b.getVoo_codigo())
+            {
+                bilhete.remove(b);
+                return;
+            }
+        }
+    }
+
+    public void addBilhete(int codigo) {
+        Bilhete b=new  Bilhete(this.codigo, 1, new Date(), codigo);
+    }
 }

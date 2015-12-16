@@ -16,4 +16,5 @@ public class Listas {
     public static  ArrayList<Cliente> clientes=new ArrayList<Cliente>();
     public static ArrayList<Voo> voos=new ArrayList<Voo>();
     public static Map<Integer,Localizacao> localizacoes=new HashMap<Integer,Localizacao>();
+    public static int voo_escolhido=0;
 }

@@ -11,16 +11,18 @@ public class Voo {
     private int local_fim;
     private Date data;
     private int codigo_aviao;
+    private String tempo_voo;
 
     public Voo() {
     }
 
-    public Voo(int codigo, int local_inicio, int local_fim, Date data, int codigo_aviao) {
+    public Voo(int codigo, int local_inicio, int local_fim, Date data, int codigo_aviao,String tempo_voo) {
         this.codigo = codigo;
         this.local_inicio = local_inicio;
         this.local_fim = local_fim;
         this.data = data;
         this.codigo_aviao = codigo_aviao;
+        this.tempo_voo=tempo_voo;
     }
 
     public int getCodigo() {
@@ -61,5 +63,13 @@ public class Voo {
 
     public void setCodigo_aviao(int codigo_aviao) {
         this.codigo_aviao = codigo_aviao;
+    }
+
+    public String getTempo_voo() {
+        return tempo_voo;
+    }
+
+    public void setTempo_voo(String tempo_voo) {
+        this.tempo_voo = tempo_voo;
     }
 }

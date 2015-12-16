@@ -2,6 +2,7 @@ package com.example.haslerchoo.saa.util;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.haslerchoo.saa.Tab_lista;
 import com.example.haslerchoo.saa.controller.DesignRecyclerAdapter;
@@ -31,6 +32,7 @@ public class Backrun extends AsyncTask<Void,Void,Void> {
         super.onPostExecute(aVoid);
         Listar_voo.recyclerView.setAdapter(new DesignRecyclerAdapter(Listas.voos));
         if (Listas.logInCliente!=null) {
+            Log.d("reserva",Listar_reserva.recyclerView+"");
             Listar_reserva.recyclerView.setAdapter(new DesignRecyclerAdapter(Listas.logInCliente.getVoos()));
         }
 

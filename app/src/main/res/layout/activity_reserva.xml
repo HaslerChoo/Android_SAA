@@ -1,99 +1,158 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.haslerchoo.saa.controller.reserva"
-    android:background="#fbfbfb">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="300px"
-        android:id="@+id/imgMapa"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/mapa"
-        android:adjustViewBounds="false" />
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Origem:"
-        android:id="@+id/txtOrigem"
-        android:layout_below="@+id/imgMapa"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="61dp" />
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Maputo"
-        android:id="@+id/textView2"
-        android:layout_above="@+id/textView4"
-        android:layout_centerHorizontal="true" />
+            <ImageView
+                android:id="@+id/mapa"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/mapa"
+                app:layout_collapseMode="parallax"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Destino:"
-        android:id="@+id/txtDestino"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtOrigem"
-        android:layout_alignParentLeft="true" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Londres"
-        android:id="@+id/textView4"
-        android:layout_above="@+id/textView5"
-        android:layout_alignStart="@+id/textView2" />
+        </android.support.design.widget.CollapsingToolbarLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Data Voo:"
-        android:id="@+id/textView5"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtDestino"
-        android:layout_alignParentLeft="true" />
+    </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="21/11/2015"
-        android:id="@+id/textView6"
-        android:layout_below="@+id/textView4"
-        android:layout_alignStart="@+id/textView4" />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reservar"
-        android:id="@+id/btnReservar"
-        android:layout_marginTop="56dp"
-        android:layout_below="@+id/textView5"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/textView6"
-        android:background="#90c4e7" />
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context=".controller.Reserva"
+            android:background="#fbfbfb">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancelar"
-        android:id="@+id/btnCancelar"
-        android:layout_alignTop="@+id/btnReservar"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/textView2"
-        android:background="#90c4e7" />
-</RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Origem:"
+                android:id="@+id/txtOrigem"
+                android:layout_alignParentStart="true"
+                android:adjustViewBounds="false"
+                android:layout_marginTop="61dp"
+                android:layout_alignEnd="@+id/textView5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/reserva_origem"
+                android:layout_above="@+id/reserva_destino"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Destino:"
+                android:id="@+id/txtDestino"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txtOrigem"
+                android:layout_alignParentLeft="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/reserva_destino"
+                android:layout_above="@+id/textView5"
+                android:layout_alignStart="@+id/reserva_origem" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Data Voo:"
+                android:id="@+id/textView5"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txtDestino"
+                android:layout_alignParentLeft="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/data_voo"
+                android:layout_below="@+id/reserva_destino"
+                android:layout_alignStart="@+id/reserva_destino" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reservar"
+                android:id="@+id/btnReservar"
+                android:layout_marginTop="56dp"
+                android:layout_below="@+id/textView5"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/data_voo"
+                android:background="#90c4e7" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:id="@+id/btnCancelar"
+                android:layout_alignTop="@+id/btnReservar"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/reserva_destino"
+                android:background="#90c4e7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Horas:"
+                android:id="@+id/textView"
+                android:layout_below="@+id/textView5"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/horas_voo"
+                android:layout_below="@+id/data_voo"
+                android:layout_alignEnd="@+id/data_voo" />
+
+
+        </RelativeLayout>
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+
+-->

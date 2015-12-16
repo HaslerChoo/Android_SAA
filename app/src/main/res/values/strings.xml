@@ -33,4 +33,5 @@
     </string>
     <string name="title_activity_sign_up">SignUp</string>
     <string name="title_activity_edit_cliente">Edit_cliente</string>
+    <string name="title_activity_voo_detalhes">Map</string>
 </resources>

@@ -24,7 +24,7 @@ public class Databaseconnector {
             Class.forName("com.mysql.jdbc.Driver");
             Log.d("BD", "sucesso2");
             return DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/saa", "root", "choo");
-
+           // return DriverManager.getConnection("jdbc:mysql://10.71.34.1:3306/saa", "root", "choo");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             Log.d("BD", "fail");
@@ -78,6 +78,7 @@ public class Databaseconnector {
                 voo.setData(data);
                 voo.setLocal_fim(rs.getInt("local_fim"));
                 voo.setLocal_inicio(rs.getInt("local_inicio"));
+                voo.setTempo_voo(rs.getString("hora_voo"));
                 Listas.voos.add(voo);
             }
             rs.close();
@@ -177,6 +178,65 @@ public class Databaseconnector {
             stmt.execute();
             stmt.close();
             con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean tem_reserva(int cliente, int voo) {
+        Connection con = getConnection();
+        // pega a conex ã o e o Statement
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement("SELECT * FROM bilhete  where cliente_cod=? and voo_cod=?");
+            stmt.setInt(1, cliente);
+            stmt.setInt(2, voo);
+            stmt.execute();
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Log.d("tem_reserva","true");
+               return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Log.d("tem_reserva","false");
+        return false;
+    }
+
+
+    public static void saveBilhete(int cliente,int voo) {
+        Connection con = getConnection();
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement("INSERT INTO bilhete VALUES (?,?,?,?)");
+            Log.d("saveBilhete", "ok");
+            stmt.setInt(1, cliente);
+            stmt.setInt(2, voo);
+            stmt.setInt(3, 1);
+            stmt.setDate(4, new java.sql.Date(new Date().getTime()));
+            stmt.execute();
+            stmt.close();
+            con.close();
+            Log.d("saveBilhete", "ok1");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void saveCancelar(int cliente, int voo) {
+        Connection con = getConnection();
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement("delete from bilhete where cliente_cod=? and voo_cod=?");
+            stmt.setInt(1, cliente);
+            stmt.setInt(2, voo);
+             stmt.execute();
+            stmt.close();
+            con.close();
+            Log.d("saveCancelar", "ok");
         } catch (SQLException e) {
             e.printStackTrace();
         }

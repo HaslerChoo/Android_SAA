@@ -1,11 +1,13 @@
 package com.example.haslerchoo.saa.controller;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -140,8 +142,7 @@ public class SignUp extends AppCompatActivity  implements NavigationView.OnNavig
                 new NovoCliente(novo).execute();
                 Listas.clientes.add(novo);
                 Snackbar.make(view, "Criado", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-                Intent intent=new Intent(getApplicationContext(),Login.class);
-                startActivity(intent);
+               finish();
             }
         });
     }
@@ -220,6 +221,7 @@ public class SignUp extends AppCompatActivity  implements NavigationView.OnNavig
     }
 
 
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
